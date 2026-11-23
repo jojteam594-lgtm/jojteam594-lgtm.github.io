@@ -54,6 +54,8 @@
   .shot { aspect-ratio: 16 / 10; overflow: hidden; background: var(--line); }
   .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .4s; }
   .work:hover .shot img { transform: scale(1.03); }
+  .grid > .work:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .grid > .work:last-child:nth-child(odd) .shot { aspect-ratio: 21 / 9; }
   .work .body { padding: 20px 22px 24px; }
   .work h3 { font-size: 1.4rem; }
   .work .kind { color: var(--muted); font-size: .95rem; margin: 6px 0 12px; }
@@ -117,6 +119,10 @@
         <div class="shot"><img src="thumbs/apexhub.jpg" alt="ApexHub landing page on desktop" loading="lazy" width="960" height="600"></div>
         <div class="body"><h3>ApexHub</h3><p class="kind">My own app for athletes: training load, calories and smart scheduling. Android, Windows and web.</p><span class="go">View site →</span></div>
       </a>
+      <a class="work" href="jardin/index.html">
+        <div class="shot"><img src="thumbs/jardin.jpg" alt="Tecoma Yard Co. landscaping site on desktop" loading="lazy" width="960" height="600"></div>
+        <div class="body"><h3>Tecoma Yard Co.</h3><p class="kind">Landscaping in Phoenix, AZ: services with prices, a redesign in three steps and a free estimate form.</p><span class="go">View site →</span></div>
+      </a>
       <a class="work" href="restaurante/index.html">
         <div class="shot"><img src="thumbs/restaurante.jpg" alt="Comaxtla restaurant site on desktop" loading="lazy" width="960" height="600"></div>
         <div class="body"><h3>Comaxtla</h3><p class="kind">Restaurant: menu with prices, photos and ordering by message.</p><span class="go">View site →</span></div>
@@ -130,7 +136,7 @@
         <div class="body"><h3>Rodalmo</h3><p class="kind">Bike shop and repair: service prices, parts and a weekly group ride.</p><span class="go">View site →</span></div>
       </a>
     </div>
-    <p style="color:var(--muted);font-size:.9rem;margin-top:18px">Comaxtla, Ardema and Rodalmo are fictional sample businesses, built in Spanish for the Mexican market; I build sites in English too. ApexHub is a real app I made.</p>
+    <p style="color:var(--muted);font-size:.9rem;margin-top:18px">Tecoma Yard Co., Comaxtla, Ardema and Rodalmo are fictional sample businesses: Tecoma in English for the US market, the other three in Spanish for Mexico. ApexHub is a real app I made.</p>
   </section>
 
   <section id="pricing" aria-labelledby="t-pricing">

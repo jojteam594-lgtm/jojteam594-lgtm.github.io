@@ -53,6 +53,8 @@
   .shot { aspect-ratio: 16 / 10; overflow: hidden; background: var(--line); }
   .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .4s; }
   .work:hover .shot img { transform: scale(1.03); }
+  .grid > .work:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .grid > .work:last-child:nth-child(odd) .shot { aspect-ratio: 21 / 9; }
   .work .body { padding: 20px 22px 24px; }
   .work h3 { font-size: 1.4rem; }
   .work .kind { color: var(--muted); font-size: .95rem; margin: 6px 0 12px; }
@@ -116,6 +118,10 @@
         <div class="shot"><img src="thumbs/apexhub.jpg" alt="Página de ApexHub en escritorio" loading="lazy" width="960" height="600"></div>
         <div class="body"><h3>ApexHub</h3><p class="kind">App propia para atletas: carga de entrenamiento, calorías y agenda. Android, Windows y web.</p><span class="go">Ver página →</span></div>
       </a>
+      <a class="work" href="jardin/index.html">
+        <div class="shot"><img src="thumbs/jardin.jpg" alt="Sitio de la jardinería Tecoma Yard Co. en computadora" loading="lazy" width="960" height="600"></div>
+        <div class="body"><h3>Tecoma Yard Co.</h3><p class="kind">Jardinería en Phoenix, Arizona (en inglés): servicios con precios, rediseño en tres pasos y formulario de presupuesto.</p><span class="go">Ver página →</span></div>
+      </a>
       <a class="work" href="restaurante/index.html">
         <div class="shot"><img src="thumbs/restaurante.jpg" alt="Página del restaurante Comaxtla en escritorio" loading="lazy" width="960" height="600"></div>
         <div class="body"><h3>Comaxtla</h3><p class="kind">Fonda de cocina chiapaneca y oaxaqueña: menú con precios, fotos y pedido por WhatsApp.</p><span class="go">Ver página →</span></div>
@@ -129,7 +135,7 @@
         <div class="body"><h3>Rodalmo</h3><p class="kind">Taller y tienda de bicicletas: precios de servicio, refacciones y rodada dominical.</p><span class="go">Ver página →</span></div>
       </a>
     </div>
-    <p style="color:var(--muted);font-size:.9rem;margin-top:18px">Comaxtla, Ardema y Rodalmo son negocios ficticios hechos como muestra. ApexHub es una app real hecha por mí.</p>
+    <p style="color:var(--muted);font-size:.9rem;margin-top:18px">Tecoma Yard Co., Comaxtla, Ardema y Rodalmo son negocios ficticios hechos como muestra (Tecoma, en inglés, para clientes de Estados Unidos). ApexHub es una app real hecha por mí.</p>
   </section>
 
   <section id="precios" aria-labelledby="t-precios">
