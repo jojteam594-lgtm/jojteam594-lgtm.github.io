@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raúl · Páginas web para negocios</title>
+<meta name="description" content="Páginas web rápidas para negocios: restaurantes, consultorios, tiendas y apps. Entrega en 3 días.">
+<meta property="og:title" content="Raúl · Páginas web para negocios">
+<meta property="og:description" content="Portafolio: restaurante, consultorio dental, taller de bicis y la app ApexHub.">
+<meta property="og:image" content="https://jojteam594-lgtm.github.io/thumbs/restaurante.jpg">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0; --surface: #ffffff; --ink: #16181d; --muted: #5d6270;
+    --line: #e4e0d6; --accent: #1f6f5c; --accent-ink: #ffffff;
+    --radius: 14px; --wrap: 1120px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 Inter, system-ui, sans-serif; }
+  a { color: inherit; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", Inter, sans-serif; line-height: 1.08; margin: 0; letter-spacing: -.02em; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; }
+  .logo { font: 800 1.15rem "Bricolage Grotesque", sans-serif; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 600; transition: transform .15s, box-shadow .15s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px #1f6f5c33; }
+  .btn:active { transform: translateY(0); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn.ghost:hover { box-shadow: none; background: var(--ink); color: var(--bg); }
+  nav .btn { padding: 10px 18px; font-size: .95rem; }
+
+  .hero { padding: 72px 0 64px; }
+  .hero h1 { font-size: clamp(2.4rem, 6.4vw, 4.6rem); font-weight: 800; max-width: 15ch; }
+  .hero p { font-size: 1.15rem; color: var(--muted); max-width: 46ch; margin: 22px 0 30px; }
+  .hero .en { font-size: .95rem; margin-top: 18px; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; padding: 0; list-style: none; }
+  .chips li { border: 1px solid var(--line); background: var(--surface); padding: 7px 14px; border-radius: 999px; font-size: .92rem; }
+
+  section { padding: 64px 0; }
+  .eyebrow { font-size: .85rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin: 0 0 10px; }
+  h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 32px; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .work { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+  .work:hover { transform: translateY(-2px); box-shadow: 0 14px 34px #16181d14; }
+  .shot { aspect-ratio: 16 / 10; overflow: hidden; background: var(--line); }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .4s; }
+  .work:hover .shot img { transform: scale(1.03); }
+  .work .body { padding: 20px 22px 24px; }
+  .work h3 { font-size: 1.4rem; }
+  .work .kind { color: var(--muted); font-size: .95rem; margin: 6px 0 12px; }
+  .work .go { font-weight: 600; color: var(--accent); background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size .25s; }
+  .work:hover .go { background-size: 100% 2px; }
+
+  .prices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .price { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .price h3 { font-size: 1.25rem; }
+  .price .amount { font: 800 2rem "Bricolage Grotesque", sans-serif; margin: 12px 0 4px; }
+  .price .amount small { font: 500 .95rem Inter, sans-serif; color: var(--muted); }
+  .price ul { padding-left: 18px; margin: 14px 0 0; color: var(--muted); }
+  .price.main { border: 2px solid var(--accent); }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: s; padding: 0; list-style: none; }
+  .steps li { counter-increment: s; border-top: 2px solid var(--ink); padding-top: 18px; }
+  .steps li::before { content: counter(s, decimal-leading-zero); font: 800 1rem "Bricolage Grotesque", sans-serif; color: var(--accent); display: block; margin-bottom: 8px; }
+  .steps b { display: block; font-size: 1.1rem; margin-bottom: 4px; }
+  .steps span { color: var(--muted); }
+
+  .close { background: var(--ink); color: var(--bg); border-radius: 22px; padding: 56px 40px; text-align: center; margin: 32px 0 64px; }
+  .close h2 { margin-bottom: 14px; }
+  .close p { color: #c9ccd4; margin: 0 auto 28px; max-width: 44ch; }
+  .close .btn { background: var(--bg); color: var(--ink); }
+  footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--muted); font-size: .88rem; }
+
+  @media (max-width: 820px) {
+    .grid, .prices, .steps { grid-template-columns: 1fr; }
+    .hero { padding: 40px 0 44px; }
+    section { padding: 48px 0; }
+    .close { padding: 44px 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Principal">
+    <a class="logo" href="#">Raúl<span>.</span>web</a>
+    <a class="btn" href="https://wa.me/529661034541?text=Hola%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina" target="_blank" rel="noopener">Pedir cotización</a>
+  </nav>
+
+  <header class="hero">
+    <h1>Páginas web para negocios, listas en 3 días</h1>
+    <p>Hago sitios rápidos que se ven bien en el celular: menú o servicios con fotos, ubicación, horario y un botón para que tus clientes te escriban por WhatsApp.</p>
+    <a class="btn" href="#trabajos">Ver trabajos</a>
+    <a class="btn ghost" href="#precios" style="margin-left:8px">Ver precios</a>
+    <p class="en">English? I build fast, mobile-first websites for small businesses. Landing pages from USD 150, delivered in 3 days.</p>
+    <ul class="chips" aria-label="Tipos de proyecto">
+      <li>Restaurantes</li><li>Consultorios</li><li>Tiendas y talleres</li><li>Apps web (PWA)</li><li>Add-ons de Minecraft Bedrock</li>
+    </ul>
+  </header>
+</div>
+
+<main class="wrap">
+  <section id="trabajos" aria-labelledby="t-trabajos">
+    <p class="eyebrow">Portafolio</p>
+    <h2 id="t-trabajos">Trabajos recientes</h2>
+    <div class="grid">
+      <a class="work" href="apexhub/index.html">
+        <div class="shot"><img src="thumbs/apexhub.jpg" alt="Página de ApexHub en escritorio" loading="lazy" width="960" height="600"></div>
+        <div class="body"><h3>ApexHub</h3><p class="kind">App propia para atletas: carga de entrenamiento, calorías y agenda. Android, Windows y web.</p><span class="go">Ver página →</span></div>
+      </a>
+      <a class="work" href="restaurante/index.html">
+        <div class="shot"><img src="thumbs/restaurante.jpg" alt="Página del restaurante Comaxtla en escritorio" loading="lazy" width="960" height="600"></div>
+        <div class="body"><h3>Comaxtla</h3><p class="kind">Fonda de cocina chiapaneca y oaxaqueña: menú con precios, fotos y pedido por WhatsApp.</p><span class="go">Ver página →</span></div>
+      </a>
+      <a class="work" href="dentista/index.html">
+        <div class="shot"><img src="thumbs/dentista.jpg" alt="Página del consultorio dental Ardema en escritorio" loading="lazy" width="960" height="600"></div>
+        <div class="body"><h3>Ardema</h3><p class="kind">Consultorio dental: servicios, primera visita, horario y citas por WhatsApp.</p><span class="go">Ver página →</span></div>
+      </a>
+      <a class="work" href="bicis/index.html">
+        <div class="shot"><img src="thumbs/bicis.jpg" alt="Página del taller de bicicletas Rodalmo en escritorio" loading="lazy" width="960" height="600"></div>
+        <div class="body"><h3>Rodalmo</h3><p class="kind">Taller y tienda de bicicletas: precios de servicio, refacciones y rodada dominical.</p><span class="go">Ver página →</span></div>
+      </a>
+    </div>
+    <p style="color:var(--muted);font-size:.9rem;margin-top:18px">Comaxtla, Ardema y Rodalmo son negocios ficticios hechos como muestra. ApexHub es una app real hecha por mí.</p>
+  </section>
+
+  <section id="precios" aria-labelledby="t-precios">
+    <p class="eyebrow">Precios</p>
+    <h2 id="t-precios">Paquetes y precios</h2>
+    <div class="prices">
+      <div class="price main">
+        <h3>Página de negocio</h3>
+        <p class="amount">$1,500 <small>MXN</small></p>
+        <ul><li>Una página completa</li><li>Botón de WhatsApp y mapa</li><li>2 rondas de cambios</li><li>Entrega en 3 días</li></ul>
+      </div>
+      <div class="price">
+        <h3>Combo local</h3>
+        <p class="amount">$1,800 <small>MXN</small></p>
+        <ul><li>Página de negocio</li><li>Ficha de Google Maps arreglada</li><li>Menú o catálogo con código QR</li></ul>
+      </div>
+      <div class="price">
+        <h3>Mantenimiento</h3>
+        <p class="amount">$300 <small>MXN / mes</small></p>
+        <ul><li>Cambios de menú y precios</li><li>Fotos nuevas</li><li>Ayuda con el hosting</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-proceso">
+    <p class="eyebrow">Cómo trabajo</p>
+    <h2 id="t-proceso">Proceso en tres pasos</h2>
+    <ol class="steps">
+      <li><b>Muestra gratis</b><span>Te preparo una vista previa con el nombre de tu negocio, sin compromiso.</span></li>
+      <li><b>Anticipo del 50%</b><span>Si te gusta, pagas la mitad por transferencia y empiezo.</span></li>
+      <li><b>Entrega en 3 días</b><span>Revisas, pido tus cambios y pagas el resto al entregar.</span></li>
+    </ol>
+  </section>
+
+  <div class="close">
+    <h2>Cotiza tu página hoy</h2>
+    <p>Mándame el nombre de tu negocio y te respondo con una muestra.</p>
+    <a class="btn" href="https://wa.me/529661034541?text=Hola%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+  </div>
+</main>
+
+<footer class="wrap">© 2026 Raúl · Desarrollo web. Fotos de muestra: Wikimedia Commons (créditos en cada página).</footer>
+</body>
+</html>

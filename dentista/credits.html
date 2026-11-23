@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="es-MX" data-type="service" data-radius="soft" data-buttons="block" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ardema: photograph credits</title>
+<meta name="description" content="The photographers, licences and source pages of the photographs on the Ardema website.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ardema: consultorio dental en Los Laureles, Tapachula">
+<meta property="og:description" content="Limpieza, resinas, blanqueamiento, ortodoncia y urgencias, con cita por WhatsApp.">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#eeecea">
+<!-- <link rel="canonical" href="https://[the client's domain]/"> : add once the clinic has its domain -->
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..700&family=Libre+Franklin:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #eeecea; --p-surface: #e4e1dd; --p-ink: #333231; --p-muted: #625f5b;
+  --p-accent: #5c6b54; --p-accent-ink: #ffffff; --p-action: #5c6b54; --p-action-ink: #ffffff;
+  --p-inv-bg: #333231; --p-inv-surface: #3e3d3c; --p-inv-ink: #eeecea; --p-inv-muted: #adaba9;
+  --p-inv-accent: #eeecea; --p-inv-accent-ink: #333231; --p-inv-action: #eeecea; --p-inv-action-ink: #333231;
+  --font-display: "Source Serif 4", Georgia, serif;
+  --font-text: "Libre Franklin", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.02em;
+  --display-tracking-xl: -0.026em;
+}
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/photo-chapters/moment.js">
+<link rel="modulepreload" href="assets/moments/picture-develops/moment.js">
+<!-- page CSS: the nav card's crop, the services photograph, the orthodontics pair, the developing photograph -->
+<style>
+  .menu-card .frame__img { object-position: 50% 30%; }
+  #servicios .section-head { margin-bottom: var(--s-7); }
+  #servicios .pl-photo, #visita .pl-photo { --pl-r: 1; }
+  #ortodoncia .pl-photo { --pl-r: 1.3333; --pl-head: 190px; }
+  #preguntas .pl-photo { --pl-r: .8; }
+  #preguntas .faq { margin-top: var(--s-7); }
+  /* photo-chapters at rest (reduced motion): the three chapters stay within the section's one screen */
+  #primera-visita:not(.is-live) .mo-ph__pic > img { max-height: 38svh; }
+  .develop { margin: 0; border-radius: var(--r-lg); overflow: hidden; height: min(600px, var(--ly-fit)); }
+  .develop > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  #consultorio .split-col p { max-width: 46ch; }
+  #visita .visit__cols { grid-template-columns: minmax(0, 1fr); }
+  #visita .pl-photo > img { object-position: 50% 40%; }
+  @media (max-width: 1023px) {
+    .develop { height: auto; aspect-ratio: 16 / 9; margin-top: var(--s-7); }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #ortodoncia .pair > .pl-photo { grid-column: auto / span 6; --pl-r: .8; }
+    /* the tablet keeps the desktop's split: words on the left half, the photograph on the right */
+    :is(#servicios, #visita, #consultorio) .grid > :first-child { grid-column: 1 / span 6; }
+    :is(#servicios, #visita, #consultorio) .grid > :last-child { grid-column: 7 / span 6; }
+    #servicios .pl-photo { --pl-r: .8; }
+    #visita .pl-photo { --pl-r: .5; }
+    .develop { aspect-ratio: 1 / 2; margin-top: 0; }
+    #preguntas { --h: 2; }
+    #preguntas .pl-photo { --pl-r: .62; margin-top: var(--s-7); }
+  }
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    #visita .pl-photo { --pl-r: .8; }
+  }
+  @media (max-width: 639px) {
+    #ortodoncia .pl-photo { --pl-r: 1.7778; }
+    #servicios .pl-photo { --pl-r: .6; }
+    #visita .pl-photo { --pl-r: 1.7778; }
+    #preguntas .pl-photo { --pl-r: .6; margin-top: var(--s-7); }
+    #primera-visita:not(.is-live) .mo-ph__pic > img { aspect-ratio: 4 / 3; max-height: none; }
+    /* at rest on a phone the stacked chapters fill two whole screens */
+    main > #primera-visita:not(.is-live) { min-height: calc(2 * 100lvh); }
+  }
+</style>
+</head>
+<body>
+<!-- type: service (a dental clinic: people are hired)
+     deal: hero split, palette three-stones (a pale stone ground like a treatment room's plaster and counters, a muted
+     olive accent that reads clinical without the hospital blue), type source-serif (Source Serif 4 / Libre Franklin; the first deal, hanken, failed hero-lines), nav nav-mega,
+     footer footer-columns, close close-photo, rhythm dark-band (#consultorio on .ground-inverse), buttons block,
+     mark initial, radius soft, grounds and effects none (kind other)
+     moments: photo-chapters in #primera-visita (the first visit told in three photographs in the space of one
+     screen), picture-develops on the #consultorio photograph (the room's tools come up as the dark band arrives)
+     motion: hero entrance (the claim first, then what to do); hover on every link, button and linked card
+     screens: hero 1, servicios 1 (2 at 390), primera-visita 3 (photo-chapters), ortodoncia 1, preguntas 1 (2 at 390),
+     consultorio 1, visita 1 (2 at 390), footer.closing 1. Every photograph is a stand-in from Wikimedia Commons. -->
+
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Saltar al contenido</a>
+    <a class="nav__logo" href="#top"><span class="mark mark--initial" aria-hidden="true">A</span>Ardema</a>
+    <nav class="nav__links" id="nav-links" aria-label="Principal">
+      <div class="nav__item">
+        <a class="nav__link" href="index.html#servicios">Servicios <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <div class="menu-col span-3">
+              <p class="t-label">Tratamientos</p>
+              <a href="index.html#resinas">Resinas<span>Del color del diente</span></a>
+              <a href="index.html#blanqueamiento">Blanqueamiento<span>Con revisión de encías</span></a>
+              <a href="index.html#urgencias">Urgencias<span>Dolor o una pieza rota</span></a>
+            </div>
+            <div class="menu-col span-3">
+              <p class="t-label">Tu cita</p>
+              <a href="index.html#primera-visita">Primera visita<span>Revisión y presupuesto</span></a>
+              <a href="index.html#preguntas">Preguntas<span>Antes de agendar</span></a>
+            </div>
+            <a class="menu-card span-3 start-10" href="index.html#limpieza">
+              <div class="panel"><img class="frame__img" src="assets/img/photo-f17975113-500.jpg" srcset="assets/img/photo-f17975113-500.jpg 500w, assets/img/photo-f17975113-960.jpg 960w" sizes="302px" width="500" height="375" alt="Cepillos interdentales en un vaso blanco" decoding="async" data-source="stand-in" data-subject="cepillos interdentales"></div>
+              <span class="t-card">Limpieza</span>
+              <span class="t-small muted">Ultrasonido, pulido y revisión</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="nav__item"><a class="nav__link" href="index.html#ortodoncia">Ortodoncia</a></div>
+      <div class="nav__item"><a class="nav__link" href="index.html#consultorio">Consultorio</a></div>
+      <div class="nav__item"><a class="nav__link" href="index.html#visita">Horario</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="https://wa.me/15555550142?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20Ardema">Agendar cita por WhatsApp</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <p><a class="link" href="index.html">Ardema</a></p>
+  <section class="credits-list" id="credits" aria-labelledby="credits-h">
+    <h1 id="credits-h">Créditos de las fotografías</h1>
+    <ul>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Dental_treatment_room_featuring_equipment_and_a_chair_in_a_modern_clinic.jpg">Shixart1985</a>, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Preparing_Teeth_Whitening_Materials_for_Dental_Treatment.jpg">Jameswasswa</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Beladungsmuster_f%C3%BCr_Sterilisation_Zahnarztinstrumente_01.JPG">Bin im Garten</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Dental_x-rays_2010_pd_011.JPG">Bin im Garten</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Dental_model_demonstrating_oral_anatomy_with_detailed_teeth_and_gum_structure_in_clear_display.jpg">Shixart1985</a>, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Dental_braces.jpg">Sputnikcccp at English Wikipedia</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:2015-03-10_teeth_wearing_dental_braces.jpg">Tamaki Sono</a>, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Dental_tools_and_equipment_arranged_neatly_on_a_clinical_workstation_at_a_modern_dental_clinic.jpg">Shixart1985</a>, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Dental_equipment_in_Poland.jpg">MichalPL</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Dental_mirror.jpg">Rachmaninoff</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Two_Interdental-brushes.jpg">Denkhenk</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/File:Toothbrushes_for_Children_-_02.jpg">Poulpy</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--photo">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Agenda tu cita en Ardema</h2><p class="t-lead">Lunes a sábado en Los Laureles. Dinos qué servicio buscas y te proponemos día y hora.</p></div>
+        <a class="btn btn--primary" href="https://wa.me/15555550142?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20Ardema">Agendar cita por WhatsApp<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <div class="close__media"><img src="assets/img/photo-f53516646.jpg" srcset="assets/img/photo-f53516646-500.jpg 500w, assets/img/photo-f53516646-960.jpg 960w, assets/img/photo-f53516646.jpg 1280w" sizes="(max-width: 639px) 760px, (max-width: 1023px) 100vw, 1280px" width="1280" height="719" alt="Espejo dental sobre una superficie clara" loading="lazy" decoding="async" data-source="stand-in" data-subject="espejo dental"></div>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top">Ardema</a>
+        </div>
+        <div class="span-2 footer__col"><h3>Tratamientos</h3><ul><li><a href="index.html#limpieza">Limpieza</a></li><li><a href="index.html#resinas">Resinas</a></li><li><a href="index.html#urgencias">Urgencias</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Estética</h3><ul><li><a href="index.html#blanqueamiento">Blanqueamiento</a></li><li><a href="index.html#ortodoncia">Ortodoncia</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Tu cita</h3><ul><li><a href="index.html#primera-visita">Primera visita</a></li><li><a href="index.html#preguntas">Preguntas</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Visita</h3><ul><li><a href="index.html#consultorio">Consultorio</a></li><li><a href="index.html#visita">Horario</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Ardema &nbsp;·&nbsp; Proyecto de muestra · consultorio ficticio</span>
+        <a class="credits" href="credits.html">Fotografías vía Wikimedia Commons</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Acciones rápidas">
+  <a class="btn btn--primary" href="https://wa.me/15555550142?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20Ardema">Agendar cita por WhatsApp</a>
+</nav>
+
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+</body>
+</html>

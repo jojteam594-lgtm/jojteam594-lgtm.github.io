@@ -1,0 +1,19 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f4575699-960.jpg",
+   "files": [
+    "photo-f4575699-500.jpg",
+    "photo-f4575699-960.jpg"
+   ],
+   "id": "f4575699",
+   "alt": "2625 subida puerto Orduna",
+   "by": "Javierme",
+   "licence": "CC BY 3.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2625_subida_puerto_Orduna.jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}

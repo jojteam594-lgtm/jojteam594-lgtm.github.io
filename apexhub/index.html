@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="es-MX" data-type="software" data-radius="round" data-ground="sage" data-buttons="tonal" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ApexHub: app de carga, calorías y agenda para atletas multideporte</title>
+<meta name="description" content="ApexHub calcula tu índice de sobrecarga de 7 y 28 días, lleva tus calorías y acomoda tus entrenos en tu semana. Para Android, Windows y web.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ApexHub: la app del atleta multideporte">
+<meta property="og:description" content="Carga de entrenamiento, calorías y agenda en una sola app, para ciclismo, running, natación, triatlón y gimnasio.">
+<meta property="og:image" content="https://jojteam594-lgtm.github.io/apexhub/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="theme-color" content="#f8fafc">
+<!-- <link rel="canonical" href="https://[dominio de ApexHub]/"> : se agrega cuando ApexHub tenga su dominio -->
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #f8fafc; --p-surface: #eef2f7; --p-ink: #0f172a; --p-muted: #5c6c83;
+  --p-accent: #0055ff; --p-accent-ink: #f8fafc; --p-action: #0055ff; --p-action-ink: #f8fafc;
+  --p-inv-bg: #0f172a; --p-inv-surface: #1c2437; --p-inv-ink: #f8fafc; --p-inv-muted: #969ba6;
+  --p-inv-accent: #f8fafc; --p-inv-accent-ink: #0f172a; --p-inv-action: #f8fafc; --p-inv-action-ink: #0f172a;
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-text: "Manrope", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.045em;
+  --ly-scale: 0.97;
+}
+</style>
+<link rel="stylesheet" href="assets/ui/base.css">
+<link rel="stylesheet" href="assets/diagrams/diagram.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/letters-assemble/moment.js">
+<link rel="modulepreload" href="assets/moments/liquid-hover/moment.js">
+<!-- page CSS: the logo image, the rebuilt ApexHub screens (inside visuals), the collage pieces, the app window
+     (sections-library.md app-frame), one --p-h per card group, the photograph frame and the statement's legend -->
+<style>
+  .nav__logo img, .footer .nav__logo img { width: 28px; height: 28px; border-radius: 8px; flex: none; }
+  .nav__logo { display: inline-flex; align-items: center; gap: 10px; }
+
+  /* ApexHub's own interface, rebuilt from the app (px sizes, 13px text and 12px meta at least) */
+  .ax { --ax-blue: #0055ff; --ax-ink: #0f172a; --ax-muted: #5b6b80; --ax-line: #e2e8f0; --ax-soft: #f1f5f9; --ax-tint: #eff6ff;
+        --ax-green: #047857; --ax-green-bg: #ecfdf5; --ax-amber: #b45309; --ax-amber-bg: #fffbeb; --ax-rose: #be123c;
+        font-family: var(--font-text); color: var(--ax-ink); font-size: 13px; line-height: 1.4; font-weight: 400; text-align: left; }
+  .ax .mono { font-family: var(--font-mono); font-weight: 500; letter-spacing: 0; }
+  .ax-card { background: #fff; border: 1px solid var(--ax-line); border-radius: 20px; padding: 16px; display: grid; gap: 12px; box-shadow: 0 1px 2px rgb(15 23 42 / .06), 0 18px 40px -24px rgb(15 23 42 / .35); }
+  .ax-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .ax-lbl { font-size: 12px; color: var(--ax-muted); font-weight: 500; display: block; }
+  .ax-lbl--blue { color: var(--ax-blue); }
+  .ax-title { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; margin: 0; color: var(--ax-ink); }
+  .ax-chip { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: 99px; font-size: 12px; font-weight: 500; white-space: nowrap; border: 1px solid var(--ax-line); color: var(--ax-muted); background: #fff; }
+  .ax-chip--ok { background: var(--ax-green-bg); color: var(--ax-green); border-color: #a7f3d0; }
+  .ax-chip--warn { background: var(--ax-amber-bg); color: var(--ax-amber); border-color: #fde68a; }
+  .ax-chip--blue { background: var(--ax-tint); color: var(--ax-blue); border-color: #bfdbfe; }
+  .ax-gauge { position: relative; width: 100%; max-width: 208px; margin: 0 auto; aspect-ratio: 208 / 112; overflow: hidden; }
+  .ax-gauge svg { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
+  .ax-gauge__val { position: absolute; left: 0; right: 0; bottom: 2px; display: grid; justify-items: center; }
+  .ax-gauge__val b { font: 500 30px/1 var(--font-mono); }
+  .ax-gauge__val span { font-size: 12px; color: var(--ax-muted); margin-top: 2px; }
+  .ax-legend { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; text-align: center; font-size: 12px; padding-top: 10px; border-top: 1px solid var(--ax-line); }
+  .ax-legend > span { padding: 6px 2px; border-radius: 8px; background: var(--ax-soft); color: var(--ax-muted); line-height: 1.25; }
+  .ax-legend > span b { display: block; font: 500 12px/1.3 var(--font-mono); color: var(--ax-ink); }
+  .ax-legend > .is-on { background: none; color: var(--ax-green); }
+  .ax-legend > .is-on b { color: var(--ax-green); }
+  .ax-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ax-stat { background: var(--ax-soft); border-radius: 14px; padding: 10px 12px; }
+  .ax-stat b { font: 500 20px/1.2 var(--font-mono); display: inline-block; margin-top: 2px; }
+  .ax-stat small { font-size: 12px; color: var(--ax-muted); margin-left: 4px; }
+  .ax-eq { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center; background: var(--ax-soft); border-radius: 14px; padding: 10px 6px; }
+  .ax-eq span { font-size: 12px; color: var(--ax-muted); display: block; }
+  .ax-eq b { font: 500 14px/1.4 var(--font-mono); }
+  .ax-eq .g { color: var(--ax-green); } .ax-eq .a { color: var(--ax-amber); } .ax-eq .bl { color: var(--ax-blue); }
+  .ax-eq > div:last-child { border-left: 1px solid var(--ax-line); }
+  .ax-bar { display: grid; gap: 4px; }
+  .ax-bar__row { display: flex; justify-content: space-between; font-size: 12px; font-weight: 500; }
+  .ax-bar__row .mono { font-size: 12px; }
+  .ax-bar__track { height: 6px; border-radius: 99px; background: var(--ax-soft); overflow: hidden; }
+  .ax-bar__track i { display: block; height: 100%; border-radius: 99px; background: var(--ax-ink); }
+  .ax-bar__track i.b { background: var(--ax-blue); } .ax-bar__track i.g { background: #10b981; } .ax-bar__track i.a { background: #f59e0b; }
+  .ax-btn { display: inline-flex; align-items: center; justify-content: center; height: 32px; padding: 0 12px; border-radius: 99px; font-size: 12px; font-weight: 500; background: var(--ax-blue); color: #fff; white-space: nowrap; }
+  .ax-btn--blue { background: var(--ax-blue); }
+  .ax-btn--ghost { background: color-mix(in oklab, #0f172a 8%, #f8fafc); color: var(--ax-ink); }
+  .ax-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-radius: 14px; background: var(--ax-soft); }
+  .ax-row p { margin: 0; font-weight: 500; }
+  .ax-row small { display: block; font-size: 12px; color: var(--ax-muted); }
+  .ax-row--busy { background: #e9eef4; }
+  .ax-row--work { background: #fff; box-shadow: inset 0 0 0 1px #bfdbfe; }
+  .ax-row--adj { background: #fff; box-shadow: inset 0 0 0 1px #6ee7b7; }
+  .ax-time { font: 500 12px/1.3 var(--font-mono); color: var(--ax-muted); }
+  .ax-days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .ax-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ax-chips span { padding: 6px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; box-shadow: inset 0 0 0 1px var(--ax-line); }
+  .ax-chips span.is-on { background: var(--ax-tint); color: var(--ax-blue); box-shadow: inset 0 0 0 1px #bfdbfe; }
+  .ax-days span { text-align: center; padding: 6px 0; border-radius: 12px; font-size: 12px; font-weight: 500; background: #fff; box-shadow: inset 0 0 0 1px var(--ax-line); }
+  .ax-days span.is-on { background: var(--ax-tint); color: var(--ax-blue); box-shadow: inset 0 0 0 1px #bfdbfe; }
+  .ax-switch { width: 36px; height: 20px; border-radius: 99px; background: #cbd5e1; position: relative; flex: none; }
+  .ax-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / .2); }
+  .ax-switch.is-on { background: var(--ax-ink); } .ax-switch.is-on::after { left: 18px; }
+  .ax-scan { position: relative; height: 128px; border-radius: 14px; background: #0f172a; overflow: hidden; display: grid; place-items: center; }
+  .ax-scan__line { position: absolute; left: 8%; right: 8%; top: 18%; height: 3px; border-radius: 3px; background: #34d399; box-shadow: 0 0 12px #10b981; }
+  .ax-scan__tag { position: relative; padding: 4px 10px; border-radius: 99px; background: rgb(0 0 0 / .6); color: #6ee7b7; font: 500 12px/1.4 var(--font-mono); }
+  .ax-found { background: var(--ax-green-bg); border-radius: 14px; padding: 12px; display: grid; gap: 6px; box-shadow: inset 0 0 0 1px #a7f3d0; }
+  .ax-found .ax-head b { font: 500 14px/1.3 var(--font-mono); color: var(--ax-amber); white-space: nowrap; }
+  .ax-found p { margin: 0; font-weight: 500; }
+  .ax-found .mono { font-size: 12px; color: var(--ax-muted); display: flex; gap: 12px; }
+  .ax-gear .mono { color: var(--ax-blue); }
+  .stage > .to-edge > .ax-card { height: 100%; align-content: start; grid-auto-rows: max-content; }
+
+  /* the app window across the .wrap (sections-library.md app-frame) */
+  .app.ui { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); margin-top: var(--s-7); background: var(--u-bg); border: 1px solid var(--u-border); border-radius: var(--u-r); box-shadow: var(--u-shadow); }
+  .app > .app__pane { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+  .app > .app__pane + .app__pane { border-left: 1px solid var(--u-line); }
+  .app > .app__pane > .ui-panel { width: 100%; border: 0; border-radius: 0; box-shadow: none; }
+  .app > .app__pane::after { content: ""; position: absolute; inset: auto 0 0 0; height: 64px; background: linear-gradient(transparent, var(--u-bg)); pointer-events: none; }
+  @media (min-width: 1024px) and (max-width: 1279px) { .app.ui { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } }
+  @media (max-width: 1023px) {
+    .app.ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+    .app > .app__pane--list { max-height: 252px; }
+    .app > .app__pane--list::after { display: none; }
+    .app > .app__pane + .app__pane { border-left: 0; border-top: 1px solid var(--u-line); }
+  }
+  @media (max-width: 639px) {
+    .app.ui { grid-template-rows: minmax(0, 1fr); }
+    .app > .app__pane--list { display: none; }
+    .app > .app__pane + .app__pane { border-top: 0; }
+  }
+  .app .ax-pane__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 52px; padding: 0 16px; border-bottom: 1px solid var(--u-line); }
+  .app .ax-list { display: grid; gap: 8px; padding: 12px; }
+  .ax-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-radius: 14px; background: var(--ax-soft); }
+  .ax-item.is-open { background: #fff; box-shadow: inset 0 0 0 1px #bfdbfe, 0 4px 14px -8px rgb(0 85 255 / .35); }
+  .ax-item__main { min-width: 0; display: grid; gap: 2px; }
+  .ax-item__src { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font: 500 12px/1.3 var(--font-mono); color: var(--ax-muted); }
+  .ax-item__src em { font-style: normal; padding: 1px 6px; border-radius: 6px; font-size: 12px; }
+  .ax-item__src em.w { background: #fef3c7; color: #92400e; } .ax-item__src em.o { background: #d1fae5; color: #065f46; }
+  .ax-item__name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ax-item__meta { font: 400 12px/1.3 var(--font-mono); color: var(--ax-muted); }
+  .ax-tss { flex: none; font: 500 12px/1 var(--font-mono); padding: 6px 8px; border-radius: 10px; background: var(--ax-tint); color: var(--ax-blue); box-shadow: inset 0 0 0 1px #bfdbfe; }
+  .ax-tss--plain { background: #fff; color: var(--ax-ink); box-shadow: inset 0 0 0 1px var(--ax-line); }
+  .ax-open { display: grid; gap: 14px; padding: 16px; }
+  .ax-map { position: relative; border-radius: 14px; overflow: hidden; background: #eef2f6; height: 150px; width: 100%; }
+  .ax-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ax-stats4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center; }
+  .ax-stats4 > div { background: var(--ax-soft); border-radius: 12px; padding: 8px 4px; }
+  .ax-stats4 span { display: block; font-size: 12px; color: var(--ax-muted); }
+  .ax-stats4 b { font: 500 13px/1.4 var(--font-mono); }
+  .ax-peak { position: relative; background: var(--ax-tint); border-radius: 14px; padding: 12px; display: grid; gap: 10px; box-shadow: inset 0 0 0 1px #bfdbfe; }
+  .ax-peak p { margin: 0; font-weight: 500; }
+  .ax-peak__btns { display: flex; gap: 8px; }
+  .ax-zones { display: grid; grid-template-columns: 8fr 43fr 42fr 7fr; gap: 3px; height: 26px; border-radius: 8px; overflow: hidden; font: 500 12px/26px var(--font-mono); text-align: center; color: #fff; }
+  .ax-zones span:nth-child(1) { background: #94a3b8; } .ax-zones span:nth-child(2) { background: #10b981; color: #052e1f; } .ax-zones span:nth-child(3) { background: #f59e0b; color: #3b2300; } .ax-zones span:nth-child(4) { background: #e11d48; }
+  .ax-verdict { background: var(--ax-amber-bg); border-radius: 14px; padding: 12px; display: grid; gap: 6px; box-shadow: inset 0 0 0 1px #fde68a; }
+  .ax-verdict p { margin: 0; color: #78350f; }
+  /* the open item's one loop: the pointer presses "Actualizar Perfil Base" and the base FTP turns 245 W to 258 W */
+  .ax-ptr { position: absolute; width: 18px; height: 18px; left: 0; top: 0; pointer-events: none; animation: ax-ptr var(--m-cycle) linear infinite; }
+  .ax-ptr svg { width: 18px; height: 18px; display: block; filter: drop-shadow(0 1px 1px rgb(0 0 0 / .3)); }
+  .ax-ptr::before { content: ""; position: absolute; left: -5px; top: -5px; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--ax-blue); opacity: 0; animation: ax-ring var(--m-cycle) linear infinite; }
+  @keyframes ax-ptr { 0% { transform: translate(260px, 70px); opacity: 0; } 8% { opacity: 1; } 34% { transform: translate(64px, 66px); } 40% { transform: translate(64px, 66px) scale(.96); } 46%, 100% { transform: translate(64px, 66px); opacity: 1; } }
+  @keyframes ax-ring { 0%, 38% { opacity: 0; transform: scale(.6); } 42% { opacity: .9; transform: scale(1); } 56%, 100% { opacity: 0; transform: scale(1.2); } }
+  .ax-peak .ax-btn--blue { animation: ax-press var(--m-cycle) linear infinite; }
+  @keyframes ax-press { 0%, 38% { transform: none; } 41% { transform: scale(.96); } 46%, 100% { transform: none; } }
+  .ax-ftp { position: relative; display: inline-grid; }
+  .ax-ftp > * { grid-area: 1 / 1; }
+  .ax-ftp .old { opacity: 0; animation: ax-old var(--m-cycle) linear infinite; } .ax-ftp .new { animation: ax-new var(--m-cycle) linear infinite; }
+  @keyframes ax-old { 0%, 44% { opacity: 1; } 48%, 100% { opacity: 0; } }
+  @keyframes ax-new { 0%, 44% { opacity: 0; } 48%, 100% { opacity: 1; } }
+
+  /* the scan in the food card loops: the line sweeps the plate, then the dish it found holds */
+  .ax-scan__line { animation: ax-sweep var(--m-cycle) linear infinite; }
+  @keyframes ax-sweep { 0% { top: 14%; opacity: .5; } 25% { top: 82%; opacity: 1; } 50% { top: 14%; opacity: .5; } 60%, 100% { top: 48%; opacity: 0; } }
+  .ax-found { animation: ax-found var(--m-cycle) linear infinite; }
+  @keyframes ax-found { 0%, 52% { opacity: .35; } 60%, 100% { opacity: 1; } }
+
+  /* the hero collage: ApexHub pieces sized in % of the collage, their text in container units */
+  .ly-collage { container-type: inline-size; }
+  .ly-collage .ly-piece { box-shadow: 0 1px 2px rgb(15 23 42 / .08), 0 22px 48px -22px rgb(15 23 42 / .38); background: #fff; border: 1px solid #e2e8f0; border-radius: 3.2cqw; }
+  .ly-collage .ax { font-size: max(13px, 2.1cqw); }
+  .ly-collage .ax-card { padding: 3cqw; gap: 2cqw; border: 0; box-shadow: none; border-radius: 0; background: none; height: 100%; align-content: start; }
+  .ly-collage .ax-lbl, .ly-collage .ax-chip, .ly-collage .ax-legend, .ly-collage .ax-legend b, .ly-collage .ax-bar__row, .ly-collage .ax-time, .ly-collage .ax-row small, .ly-collage .ax-days span, .ly-collage .ax-eq span, .ly-collage .ax-stat small, .ly-collage .ax-gauge__val span, .ly-collage .ax-found .mono { font-size: max(12px, 1.9cqw); }
+  .ly-collage .ax-title { font-size: max(13px, 2.6cqw); }
+  .ly-collage .ax-chip { height: auto; padding: .6cqw 1.8cqw; }
+  .ly-collage .ax-gauge { max-width: none; width: 78%; }
+  .ly-collage .ax-gauge__val b { font-size: max(18px, 5cqw); }
+  .ly-collage .ax-stat b { font-size: max(14px, 3.2cqw); }
+  .ly-collage .ax-eq b { font-size: max(13px, 2.3cqw); }
+  .ly-collage .ax-big { font: 500 max(18px, 4.6cqw)/1.1 var(--font-mono); color: #0055ff; }
+  .ly-collage .ax-row { padding: 1.6cqw 2cqw; border-radius: 2.2cqw; }
+  .ly-collage .ax-scan { height: 100%; border-radius: 0; }
+  .ly-collage .pc-scan { background: #0f172a; border: 0; }
+  .ly-collage .pc-corner { padding-right: 9cqw; }
+  .ly-collage .p1-acwr { left: 4%; top: 4%; width: 56%; }
+  .ly-collage .p1-kcal { left: 64%; top: 9%; width: 32%; }
+  .ly-collage .p1-lvl { left: 64%; top: 30%; width: 32%; }
+  .ly-collage .p1-log { left: 20%; bottom: 4%; width: 76%; }
+  .ax-row--dark { background: #0f172a; color: #fff; }
+  .ax-row--dark small { color: #7dd3fc; }
+  @media (max-width: 639px) {
+    .ly-collage .p1-acwr { left: 0; top: 0; width: 64%; }
+    .ly-collage .p1-kcal { left: 60%; top: 8%; width: 40%; }
+    .ly-collage .p1-lvl { display: none; }
+    .ly-collage .p1-log { left: 12%; width: 88%; bottom: 0; }
+    .ly-collage .p1-log .ax-row--dark { display: none; }
+  }   /* its corner kept clear: the pause disc sits on it */
+  @media (max-width: 639px) { .ly-collage .ax-legend, .ly-collage .pc-hide-sm { display: none; } }
+
+  /* nav menu cards: one ApexHub card at the corner of each panel */
+  .menu-card .panel { --p-h: 200px; }
+  .hero--triptych .hero__cta .btn { height: var(--btn-h, 44px); font-size: var(--t-body); padding-inline: var(--s-6); }
+  .close__word { line-height: 1.12; }
+  #motor .mo-la__sub { color: var(--ink); }
+  @media (max-width: 359px) { .nav__actions .btn { display: none; } }
+
+  /* the funciones card group */
+  #funciones .panel { --p-h: 336px; }
+  @media (min-width: 1024px) and (max-width: 1279px) { #funciones .panel { --p-h: 296px; } }
+  @media (max-width: 639px) { #funciones .panel { --p-h: 258px; } #funciones .card--open > p { display: none; } #funciones .ax-gauge__val span { display: none; } #funciones .ax-legend, #funciones .ax-pair, #funciones .ax-bar, #funciones .ax-days { display: none; } }
+
+  /* downloads: a screen of the app on each panel */
+  #descargar .panel { --p-h: 246px; }
+  @media (min-width: 1024px) and (max-width: 1279px) { #descargar .panel { --p-h: 130px; } #descargar .section-head > p { display: none; } }
+  @media (min-width: 640px) and (max-width: 1023px) { #descargar { --h: 2; } }
+  @media (max-width: 639px) { #descargar .panel { --p-h: 204px; } }
+  .dl-card > .ic-tile { margin-bottom: var(--s-4); }
+  .dl-card .btn-row { margin-top: var(--s-5); }
+
+  /* the statement's legend: the four ACWR bands the app uses */
+  .bands { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-5); margin-top: var(--s-8); }
+  .bands > div { border-top: 1px solid var(--line); padding-top: var(--s-4); display: grid; gap: var(--s-2); }
+  .bands b { font: 500 var(--t-card)/1.2 var(--font-mono); }
+  .bands span { color: var(--ink); }
+  @media (min-width: 640px) and (max-width: 1023px) { .bands { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s-6); } .bands b { font-size: var(--t-h3); } .bands { margin-top: var(--s-9); } .bands span, #motor .mo-la__sub { font-size: var(--t-lead); } #motor .mo-la__type { font-size: 14vw; } }
+  @media (max-width: 639px) { .bands { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); margin-top: var(--s-6); } }
+
+  /* deportes: the five factors and the photograph */
+  .fd-rows { margin-top: var(--s-5); }
+  .fd-rows .rows__value { font-family: var(--font-mono); font-weight: 500; }
+  #motor .mo-la__type { max-width: 6ch; }
+  #deportes .frame--photo { aspect-ratio: 5 / 4; }
+  @media (min-width: 1024px) { #deportes .frame--photo { aspect-ratio: auto; height: min(708px, calc(100svh - var(--padt) - var(--padb))); } }
+  #deportes .frame--photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 60%; }
+</style>
+</head>
+<body>
+<!-- type: software · site-kind software
+     deal: hero triptych, nav nav-cards, close close-word, footer footer-columns, rhythm space, buttons tonal,
+           mark: the client's own logo (icons/icon-192.png) in place of the dealt dots, radius round, ground sage,
+           palette: the client's own colours through start.mjs brand (#0055FF from the app, its #F8FAFC canvas and #0F172A ink),
+           type manrope (Manrope + JetBrains Mono, the first pairing; the app itself sets its figures in JetBrains Mono),
+           grounds bg-dots (hero), bg-band (preguntas); effect grain-gradient in the one [data-visual] frame (#conexiones);
+           card grounds gradient-mesh (re-dealt: painterly-landscape allows one painted panel per group, a group needs one id)
+     moments: letters-assemble in #motor (the rule the app runs on, said in three words); liquid-hover on the photograph in #deportes
+     beats: #motor (2), #deportes (4), #conexiones (6), a calm section between each; #descargar and #preguntas calm before the close -->
+
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Saltar al contenido</a>
+    <a class="nav__logo" href="#top"><img src="icons/icon-192.png" alt="" width="28" height="28">ApexHub</a>
+    <nav class="nav__links" aria-label="Principal">
+      <div class="nav__item">
+        <a class="nav__link" href="#funciones">Funciones <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <a class="menu-card span-4" href="#carga">
+              <div class="panel">
+                <div class="stage stage--fade-br"><div class="at-corner" style="--ax:24px;--ay:24px;width:min(300px, calc(100% - 32px))">
+                  <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: índice de sobrecarga ACWR en 1.08, zona óptima"><div class="ax-head"><div><span class="ax-lbl">Relación Aguda / Crónica</span><p class="ax-title">Índice de Sobrecarga (ACWR)</p></div><span class="ax-chip ax-chip--ok">Zona Óptima</span></div>
+                    <div class="ax-pair"><div class="ax-stat"><span class="ax-lbl">Fatiga Aguda (7 días)</span><b>410</b></div><div class="ax-stat"><span class="ax-lbl">Forma Crónica (28d)</span><b>380</b></div></div></div>
+                </div></div>
+              </div>
+              <span class="t-card">Índice de sobrecarga</span>
+              <span class="t-small muted">Tu carga de 7 días frente a la de 28</span>
+            </a>
+            <a class="menu-card span-4" href="#calorias">
+              <div class="panel">
+                <div class="stage stage--fade-br"><div class="at-corner" style="--ax:24px;--ay:24px;width:min(320px, calc(100% - 32px))">
+                  <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: control de déficit calórico con 1,120 kcal restantes"><div class="ax-head"><div><span class="ax-lbl">Balance Energético Diario</span><p class="ax-title">Control de Déficit Calórico</p></div></div>
+                    <div class="ax-eq"><div><span>Meta Base</span><b>2,150</b></div><div><span>+ Entreno</span><b class="g">+540</b></div><div><span>- Comida</span><b class="a">-1,570</b></div><div><span>Restante</span><b class="bl">1,120</b></div></div></div>
+                </div></div>
+              </div>
+              <span class="t-card">Calorías del día</span>
+              <span class="t-small muted">Meta, entreno y comida en una cuenta</span>
+            </a>
+            <a class="menu-card span-4" href="#agenda">
+              <div class="panel">
+                <div class="stage stage--fade-br"><div class="at-corner" style="--ax:24px;--ay:24px;width:min(300px, calc(100% - 32px))">
+                  <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: agenda inteligente con bloques ocupados y entrenos"><div class="ax-head"><div><span class="ax-lbl">EventKit &amp; Google Calendar</span><p class="ax-title">Agenda Inteligente</p></div></div>
+                    <div class="ax-row ax-row--busy"><div><span class="ax-time">09:00 - 13:00</span><p>Bloque Trabajo / Estudio</p></div></div></div>
+                </div></div>
+              </div>
+              <span class="t-card">Agenda inteligente</span>
+              <span class="t-small muted">Entrenos en los huecos libres de tu semana</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="nav__item"><a class="nav__link" href="#deportes">Deportes</a></div>
+      <div class="nav__item"><a class="nav__link" href="#conexiones">Conexiones</a></div>
+      <div class="nav__item"><a class="nav__link" href="#preguntas">Preguntas</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="#descargar">Descargar ApexHub</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menú">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--triptych bg-dots" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="span-3">
+        <h1 id="hero-h">App de entreno para atletas</h1>
+        <p class="hero__lead">Mide tu carga de 7 y 28 días, tus calorías y tu semana de entrenos. Ciclismo, running, natación, triatlón y gimnasio. Versión 2.5.0 para Android, Windows y web.</p>
+        <p class="hero__more"><a class="link" href="#web">Abrir versión web</a></p>
+      </div>
+      <div class="ly-collage span-6 start-4" role="img" aria-label="Pantallas de ApexHub: el índice de sobrecarga ACWR en 1.08, el control de déficit calórico con el plato detectado, y la agenda con el desgaste de equipo">
+        <div class="ly-collage__set is-on">
+          <div class="ly-piece p1-acwr">
+            <div class="ax ax-card">
+              <div class="ax-head"><div><span class="ax-lbl">Relación Aguda / Crónica</span><p class="ax-title">Índice de Sobrecarga (ACWR)</p></div><span class="ax-chip ax-chip--ok">Zona Óptima</span></div>
+              <div class="ax-gauge"><svg viewBox="0 0 200 108" aria-hidden="true"><circle cx="100" cy="100" r="80" fill="none" stroke="#e2e8f0" stroke-width="16" stroke-dasharray="251.32 502.65" transform="rotate(180 100 100)" stroke-linecap="round"/><circle cx="100" cy="100" r="80" fill="none" stroke="#10b981" stroke-width="16" stroke-dasharray="251.32 502.65" stroke-dashoffset="115" transform="rotate(180 100 100)" stroke-linecap="round"/></svg><div class="ax-gauge__val"><b>1.08</b><span>Ratio 7d / 28d</span></div></div>
+              <div class="ax-legend"><span><b>&lt;0.80</b>Bajo</span><span class="is-on"><b>0.80–1.30</b>Óptimo</span><span><b>1.31–1.50</b>Alerta</span><span><b>&gt;1.50</b>Crítico</span></div>
+            </div>
+          </div>
+          <div class="ly-piece p1-kcal">
+            <div class="ax ax-card"><span class="ax-lbl">Calorías Restantes Hoy</span><span class="ax-big">1,120 <small class="ax-lbl" style="display:inline">kcal</small></span></div>
+          </div>
+          <div class="ly-piece p1-lvl">
+            <div class="ax ax-card"><span class="ax-lbl">Perfil de Tolerancia</span>
+              <div class="ax-days" style="grid-template-columns:repeat(2,1fr)"><span>Principiante</span><span class="is-on">Intermedio</span><span>Avanzado</span><span>Pro</span></div>
+              <span class="ax-lbl mono ax-lbl--blue">Umbral: 300–500 TSS/sem</span>
+            </div>
+          </div>
+          <div class="ly-piece pc-corner p1-log">
+            <div class="ax ax-card">
+              <div class="ax-head"><div><span class="ax-lbl ax-lbl--blue">Actividad y Telemetría</span><p class="ax-title">Registrar Sesión de Entrenamiento</p></div><span class="ax-tss">+75 TSS</span></div>
+              <div class="ax-row ax-row--dark"><div><small class="mono">Lector Binario .FIT + GPS</small><p>Sube el archivo .fit de tu XOSS / Garmin</p></div><span class="ax-btn ax-btn--blue">Subir .FIT</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ly-collage__set" aria-hidden="true">
+          <div class="ly-piece" style="left: 4%; top: 4%; width: 60%">
+            <div class="ax ax-card">
+              <div class="ax-head"><div><span class="ax-lbl ax-lbl--blue">Balance Energético Diario</span><p class="ax-title">Control de Déficit Calórico</p></div><span class="ax-chip ax-chip--blue">Déficit</span></div>
+              <div class="ax-eq"><div><span>Meta Base</span><b>2,150</b></div><div><span>+ Entreno</span><b class="g">+540</b></div><div><span>- Comida</span><b class="a">-1,570</b></div><div><span>Restante</span><b class="bl">1,120</b></div></div>
+              <div class="ax-bar"><div class="ax-bar__row"><span>Proteína</span><span class="mono">96/150g</span></div><div class="ax-bar__track"><i class="b" style="width:64%"></i></div></div>
+              <div class="ax-bar"><div class="ax-bar__row"><span>Carbohidratos</span><span class="mono">168/260g</span></div><div class="ax-bar__track"><i class="g" style="width:65%"></i></div></div>
+              <div class="ax-bar"><div class="ax-bar__row"><span>Grasas Saludables</span><span class="mono">41/70g</span></div><div class="ax-bar__track"><i class="a" style="width:59%"></i></div></div>
+            </div>
+          </div>
+          <div class="ly-piece pc-scan" style="left: 68%; top: 8%; width: 28%; height: 34%">
+            <div class="ax ax-scan"><span class="ax-scan__tag">Enfoca tu plato</span></div>
+          </div>
+          <div class="ly-piece pc-corner" style="left: 42%; top: 62%; width: 54%; height: 34%">
+            <div class="ax ax-card"><div class="ax-head"><div><span class="ax-lbl">Plato Detectado</span><p class="ax-title">Pechuga a la plancha, arroz y aguacate</p></div></div><span class="ax-lbl mono">580 kcal · Prot: 48g · Carb: 56g · Grasa: 16g</span></div>
+          </div>
+        </div>
+        <div class="ly-collage__set" aria-hidden="true">
+          <div class="ly-piece" style="left: 4%; top: 4%; width: 58%">
+            <div class="ax ax-card">
+              <div class="ax-head"><div><span class="ax-lbl ax-lbl--blue">EventKit &amp; Google Calendar</span><p class="ax-title">Agenda Inteligente</p></div></div>
+              <div class="ax-days"><span class="is-on">Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Sáb</span></div>
+              <div class="ax-row ax-row--busy"><div><span class="ax-time">09:00 - 13:00</span><p>Bloque Trabajo / Estudio</p></div><small>Calendario OS</small></div>
+              <div class="ax-row ax-row--work"><div><span class="ax-time">19:00 - 20:15</span><p>Ciclismo Fondo 45km</p></div><span class="ax-tss">85 TSS</span></div>
+              <div class="ax-row ax-row--adj"><div><span class="ax-time">06:30 - 07:30 · Auto-Ajustado</span><p>Rodaje Regenerativo Z1</p></div><span class="ax-tss ax-tss--plain">22 TSS</span></div>
+            </div>
+          </div>
+          <div class="ly-piece" style="left: 66%; top: 10%; width: 30%">
+            <div class="ax ax-card"><span class="ax-lbl">Conectar Aplicaciones</span>
+              <div class="ax-head"><span>Strava</span><span class="ax-switch is-on"></span></div>
+              <div class="ax-head"><span>Garmin</span><span class="ax-switch is-on"></span></div>
+              <div class="ax-head"><span>XOSS</span><span class="ax-switch"></span></div>
+            </div>
+          </div>
+          <div class="ly-piece pc-corner ax-gear" style="left: 36%; top: 68%; width: 60%; height: 28%">
+            <div class="ax ax-card"><span class="ax-lbl">Desgaste Unificado de Equipo</span>
+              <div class="ax-bar"><div class="ax-bar__row"><span>Tenis Running</span><span class="mono">412 / 650 km</span></div><div class="ax-bar__track"><i class="b" style="width:63%"></i></div></div>
+              <div class="ax-bar"><div class="ax-bar__row"><span>Cadena &amp; Transmisión</span><span class="mono">1,840 / 3,000 km</span></div><div class="ax-bar__track"><i class="g" style="width:61%"></i></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span-3 start-10 hero__cta"><a class="btn btn--primary" href="#descargar">Descargar ApexHub<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a></div>
+    </div></div>
+  </section>
+
+  <section class="section" id="motor" data-moment="letters-assemble" aria-labelledby="motor-h">
+    <div class="wrap">
+      <h2 class="mo-la__type" id="motor-h">Carga sin IA</h2>
+      <p class="mo-la__sub">ApexHub mide tu fatiga con el ACWR: tu carga de los últimos 7 días entre tu promedio de 28, ponderada por el impacto de cada deporte. Tus calorías salen de la fórmula Mifflin-St Jeor.</p>
+      <div class="bands">
+        <div><b>&lt;0.80</b><span>Bajo: puedes subir la carga</span></div>
+        <div><b>0.80–1.30</b><span>Óptimo: sigue tu plan</span></div>
+        <div><b>1.31–1.50</b><span>Alerta: fatiga elevada</span></div>
+        <div><b>&gt;1.50</b><span>Crítico: toca recuperar</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sesiones" aria-labelledby="sesiones-h">
+    <div class="wrap">
+      <div class="grid">
+        <h2 class="span-5" id="sesiones-h">Tu carga real de cada archivo .FIT</h2>
+        <p class="span-6 start-7 t-lead">Sube el .fit de tu XOSS o Garmin. ApexHub lee distancia, tiempo, pulso y potencia, revisa cuánto pasaste en cada zona y suma la carga real a tu semana. <a class="link" href="#deportes">Ver los deportes</a></p>
+      </div>
+      <div class="ui app fill">
+        <div class="app__pane app__pane--list">
+          <div class="ax ui ui-ax" role="img" aria-label="Lista de entrenamientos de ApexHub: nueve sesiones de XOSS, Garmin Connect, Strava, Apple Health y sensores BLE con su carga en TSS">
+            <div class="ax-pane__bar"><span class="ax-title">Tus Entrenamientos y Datos</span><span class="ax-chip mono">9 sesiones</span></div>
+            <div class="ax-list">
+              <div class="ax-item is-open"><div class="ax-item__main"><span class="ax-item__src">XOSS G+ (.FIT) <em class="w">Z3 REAL (DERIVA Z2)</em></span><span class="ax-item__name">XOSS_Fondo_Base_GPS</span><span class="ax-item__meta">34.8 km • 74 min • 194W</span></div><span class="ax-tss">+98 TSS</span></div>
+              <div class="ax-item"><div class="ax-item__main"><span class="ax-item__src">XOSS G+ (.FIT) <em class="o">Z2 PURA VERIFICADA</em></span><span class="ax-item__name">XOSS_Rodaje_Sin_Satelite</span><span class="ax-item__meta">26.4 km • 58 min • 172W</span></div><span class="ax-tss ax-tss--plain">+62 TSS</span></div>
+              <div class="ax-item"><div class="ax-item__main"><span class="ax-item__src">Garmin Connect</span><span class="ax-item__name">Running Series 10K</span><span class="ax-item__meta">10.0 km • 52 min • 168bpm</span></div><span class="ax-tss ax-tss--plain">+78 TSS</span></div>
+              <div class="ax-item"><div class="ax-item__main"><span class="ax-item__src">Strava</span><span class="ax-item__name">Ciclismo Fondo 45km</span><span class="ax-item__meta">45.0 km • 96 min • 181W</span></div><span class="ax-tss ax-tss--plain">+85 TSS</span></div>
+              <div class="ax-item"><div class="ax-item__main"><span class="ax-item__src">Apple Health</span><span class="ax-item__name">Natación Técnica</span><span class="ax-item__meta">2.0 km • 45 min • 132bpm</span></div><span class="ax-tss ax-tss--plain">+45 TSS</span></div>
+              <div class="ax-item"><div class="ax-item__main"><span class="ax-item__src">Sensores BLE</span><span class="ax-item__name">Gimnasio Tren Superior</span><span class="ax-item__meta">50 min • 118bpm</span></div><span class="ax-tss ax-tss--plain">+40 TSS</span></div>
+              <div class="ax-item"><div class="ax-item__main"><span class="ax-item__src">Garmin Connect</span><span class="ax-item__name">Rodaje Regenerativo Z1 (30m)</span><span class="ax-item__meta">5.2 km • 30 min • 128bpm</span></div><span class="ax-tss ax-tss--plain">+22 TSS</span></div>
+              <div class="ax-item"><div class="ax-item__main"><span class="ax-item__src">XOSS G+ (.FIT) <em class="o">Z2 PURA VERIFICADA</em></span><span class="ax-item__name">XOSS_Rodillo_Base</span><span class="ax-item__meta">60 min • 165W</span></div><span class="ax-tss ax-tss--plain">+51 TSS</span></div>
+              <div class="ax-item"><div class="ax-item__main"><span class="ax-item__src">Strava</span><span class="ax-item__name">Brick Bici + Carrera</span><span class="ax-item__meta">32.0 km • 88 min • 158bpm</span></div><span class="ax-tss ax-tss--plain">+94 TSS</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="app__pane app__pane--open" data-m-loop style="--m-still: .9">
+          <div class="ax ax-open ui ui-ax" role="img" aria-label="Archivo XOSS_Fondo_Base_GPS auditado: 34.8 km en 74 minutos, más 98 TSS, 42 por ciento del tiempo en zona 3 y un nuevo pico de 258 W">
+            <div class="ax-head"><div><span class="ax-chip ax-chip--blue mono">ARCHIVO .FIT AUDITADO</span><p class="ax-title" style="margin-top:6px">XOSS_Fondo_Base_GPS</p></div><span class="ax-time">Hoy • Auditado .FIT</span></div>
+            <div class="ax-map"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <path d="M-10 150 C 80 120 160 170 240 130 S 360 90 410 110" fill="none" stroke="#dbe3ec" stroke-width="10"/>
+              <path d="M120 -10 C 140 60 110 120 150 210" fill="none" stroke="#dbe3ec" stroke-width="7"/>
+              <path d="M300 -10 C 280 50 330 120 300 210" fill="none" stroke="#e3e9f0" stroke-width="5"/>
+              <path d="M138.3 180 L182.9 158.6 L238.6 129.1 L302.9 96.4 L350 63.2 L285.7 33.6 L195.7 20 L105.7 45 L50 83.6 L71.4 124.5 L101.4 160.9 Z" fill="none" stroke="#0055ff" stroke-width="4" stroke-linejoin="round"/>
+              <circle cx="138.3" cy="180" r="6" fill="#fff" stroke="#0055ff" stroke-width="3"/>
+            </svg></div>
+            <div class="ax-stats4"><div><span>Distancia</span><b>34.8 km</b></div><div><span>Tiempo</span><b>74 min</b></div><div><span>FC / Pot.</span><b>152 / 194W</b></div><div><span>Carga Real</span><b>+98 TSS</b></div></div>
+            <div class="ax-peak">
+              <div><span class="ax-lbl ax-lbl--blue">Nuevo Pico de Sesión Detectado</span><p>Alcanzaste un esfuerzo equivalente a 258 W. Base actual: <span class="ax-ftp mono"><span class="old">245 W</span><span class="new">258 W</span></span></p></div>
+              <div class="ax-peak__btns"><span class="ax-btn ax-btn--blue">Actualizar Perfil Base</span><span class="ax-btn ax-btn--ghost">Mantener Actual</span></div>
+              <span class="ax-ptr" aria-hidden="true"><svg viewBox="0 0 18 18"><path d="M2 1.5 15 8.6l-5.6 1.3L7 15.6z" fill="#0f172a" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="ax-zones"><span>Z1</span><span>Z2 43%</span><span>Z3 42%</span><span>Z4</span></div>
+            <div class="ax-verdict"><span class="ax-chip ax-chip--warn mono" style="justify-self:start">Z3 REAL (DERIVA Z2)</span><p>Pasaste 49% del tiempo al borde superior / invadiendo Zona 3 (152 bpm medios). No cuenta como Z2 pura; se recalcula con estrés de Zona 3.</p></div>
+            <div class="ax-pair"><div class="ax-stat"><span class="ax-lbl">Fatiga Aguda (7 días)</span><b>508</b><small>pts TSS</small></div><div class="ax-stat"><span class="ax-lbl">Forma Crónica (28d avg)</span><b>380</b><small>pts/sem</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="deportes" aria-labelledby="deportes-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-5">
+          <h2 id="deportes-h">Un factor de carga por deporte</h2>
+          <p class="t-lead" style="margin-top: var(--s-5)">Una hora de running no cansa igual que una de natación. ApexHub multiplica la carga de cada sesión por el factor de su disciplina.</p>
+          <ul class="rows fd-rows">
+            <li><span class="rows__name">Ciclismo: ruta, MTB y rodillo</span><span class="rows__value">1.00×</span></li>
+            <li><span class="rows__name">Running: asfalto y trail</span><span class="rows__value">1.25×</span></li>
+            <li><span class="rows__name">Natación: alberca y aguas abiertas</span><span class="rows__value">0.85×</span></li>
+            <li><span class="rows__name">Triatlón: sesiones brick</span><span class="rows__value">1.35×</span></li>
+            <li><span class="rows__name">Gimnasio: fuerza e hipertrofia</span><span class="rows__value">0.65×</span></li>
+          </ul>
+        </div>
+        <figure class="frame frame--photo span-6 start-7" data-moment="liquid-hover" data-moment-opts='{"strength": 0.7}'>
+          <img src="assets/img/photo-f4575699-1280.jpg" srcset="assets/img/photo-f4575699-500.jpg 500w, assets/img/photo-f4575699-960.jpg 960w, assets/img/photo-f4575699-1280.jpg 1280w" sizes="(min-width: 1024px) 980px, 100vw" width="1280" height="930" alt="Un ciclista sube una carretera de montaña con curvas cerradas entre árboles" loading="lazy" decoding="async" data-source="stand-in" data-subject="ciclista en un puerto de montaña">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section g2" id="funciones" aria-labelledby="funciones-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head">
+          <h2 id="funciones-h">Tu día de atleta en cuatro pantallas. <span class="muted">Carga, calorías, comida y horario.</span></h2>
+        </div>
+        <div class="grid">
+          <article class="card card--row card--open span-6" id="carga">
+            <h3>Mide tu índice de sobrecarga</h3>
+            <p>Divide tu carga de 7 días entre la de 28. Entre 0.80 y 1.30 estás en zona óptima.</p>
+            <div class="panel" data-fx="gradient-mesh" data-fx-seed="21" data-fx-params='{"drift":0,"speed":0}'>
+              <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:340px;--ax:max(24px, 50% - 170px);--ay:40px;--ay-sm:16px">
+                <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: índice de sobrecarga ACWR en 1.08, zona óptima">
+                  <div class="ax-head"><div><span class="ax-lbl">Relación Aguda / Crónica</span><p class="ax-title">Índice de Sobrecarga (ACWR)</p></div><span class="ax-chip ax-chip--ok">Zona Óptima</span></div>
+                  <div class="ax-gauge"><svg viewBox="0 0 200 108" aria-hidden="true"><circle cx="100" cy="100" r="80" fill="none" stroke="#e2e8f0" stroke-width="16" stroke-dasharray="251.32 502.65" transform="rotate(180 100 100)" stroke-linecap="round"/><circle cx="100" cy="100" r="80" fill="none" stroke="#10b981" stroke-width="16" stroke-dasharray="251.32 502.65" stroke-dashoffset="115" transform="rotate(180 100 100)" stroke-linecap="round"/></svg><div class="ax-gauge__val"><b>1.08</b><span>Ratio 7d / 28d</span></div></div>
+                  <div class="ax-legend"><span><b>&lt;0.80</b>Bajo</span><span class="is-on"><b>0.80–1.30</b>Óptimo</span><span><b>1.31–1.50</b>Alerta</span><span><b>&gt;1.50</b>Crítico</span></div>
+                  <div class="ax-pair"><div class="ax-stat"><span class="ax-lbl">Fatiga Aguda (7 días)</span><b>410</b><small>pts TSS</small></div><div class="ax-stat"><span class="ax-lbl">Forma Crónica (28d)</span><b>380</b><small>pts/sem</small></div></div>
+                </div>
+              </div></div>
+            </div>
+          </article>
+          <article class="card card--row card--open span-6" id="calorias">
+            <h3>Lleva tus calorías del día</h3>
+            <p>Tu meta base, más lo que quemas entrenando, menos lo que comes: lo que te queda hoy.</p>
+            <div class="panel" data-fx="gradient-mesh" data-fx-seed="22" data-fx-params='{"drift":0,"speed":0}'>
+              <div class="stage stage--fade-b"><div class="at-corner to-edge" style="--ax:32px;--ay:40px;width:min(400px, calc(100% - 32px))">
+                <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: control de déficit calórico con 1,120 kcal restantes">
+                  <div class="ax-head"><div><span class="ax-lbl ax-lbl--blue">Balance Energético Diario</span><p class="ax-title">Control de Déficit Calórico</p></div><span class="ax-chip">Déficit</span></div>
+                  <div class="ax-eq"><div><span>Meta Base</span><b>2,150</b></div><div><span>+ Entreno</span><b class="g">+540</b></div><div><span>- Comida</span><b class="a">-1,570</b></div><div><span>Restante</span><b class="bl">1,120</b></div></div>
+                  <div class="ax-bar"><div class="ax-bar__row"><span>Proteína</span><span class="mono">96/150g</span></div><div class="ax-bar__track"><i style="width:64%"></i></div></div>
+                  <div class="ax-bar"><div class="ax-bar__row"><span>Carbohidratos</span><span class="mono">168/260g</span></div><div class="ax-bar__track"><i style="width:65%"></i></div></div>
+                  <div class="ax-bar"><div class="ax-bar__row"><span>Grasas Saludables</span><span class="mono">41/70g</span></div><div class="ax-bar__track"><i style="width:59%"></i></div></div>
+                  <div class="ax-bar"><div class="ax-bar__row"><span>Meta Calórica</span><span class="mono">-350 kcal/día</span></div></div>
+                </div>
+              </div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-6" id="comida">
+          <h3>Registra tu plato y sus calorías</h3>
+          <p>Toma o sube la foto de tu comida, ajusta la porción y súmala a tus calorías de hoy.</p>
+          <div class="panel" data-fx="gradient-mesh" data-fx-seed="23" data-fx-params='{"drift":0,"speed":0}' data-m-loop style="--m-still: .9">
+            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:340px;--ax:max(24px, 50% - 170px);--ay:40px;--ay-sm:16px">
+              <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: foto a tu comida con el plato detectado, 440 kcal">
+                <div class="ax-head"><div><span class="ax-lbl">Visión Nutricional</span><p class="ax-title">Foto a tu Comida</p></div><span class="ax-btn">Abrir Cámara</span></div>
+                <div class="ax-scan"><span class="ax-scan__line"></span><span class="ax-scan__tag">Enfoca tu plato o sube una foto</span></div>
+                <div class="ax-found">
+                  <div class="ax-head"><div><span class="ax-lbl">Plato Detectado</span><p>Bowl de avena, proteína whey y plátano</p></div><b>440 kcal</b></div>
+                  <span class="mono"><span>Prot: 34g</span><span>Carb: 58g</span><span>Grasa: 7g</span></span>
+                </div>
+              </div>
+            </div></div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-6" id="agenda">
+          <h3>Acomoda tu entrenamiento en tu horario</h3>
+          <p>Importa tus bloques ocupados del teléfono. Si tu ACWR pasa de 1.30, las sesiones duras se vuelven recuperación.</p>
+          <div class="panel" data-fx="gradient-mesh" data-fx-seed="24" data-fx-params='{"drift":0,"speed":0}'>
+            <div class="stage stage--fade-b"><div class="at-corner to-edge" style="--ax:32px;--ay:40px;width:min(400px, calc(100% - 32px))">
+              <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: agenda inteligente con bloques ocupados y entrenos">
+                <div class="ax-head"><div><span class="ax-lbl ax-lbl--blue">EventKit &amp; Google Calendar</span><p class="ax-title">Agenda Inteligente</p></div><span class="ax-btn ax-btn--ghost">Sincronizar OS</span></div>
+                <div class="ax-row"><div><p>Auto-Ajuste por Fatiga (ACWR)</p><small>Convierte sesiones duras en recuperación</small></div><span class="ax-btn">Aplicar Regla</span></div>
+                <div class="ax-days"><span>Lun</span><span class="is-on">Mar</span><span>Mié</span><span>Jue</span><span>Sáb</span></div>
+                <div class="ax-row ax-row--busy"><div><span class="ax-time">09:00 - 13:00</span><p>Bloque Trabajo / Estudio</p></div><small>Calendario OS</small></div>
+                <div class="ax-row ax-row--adj"><div><span class="ax-time">19:00 - 20:15 · Auto-Ajustado</span><p>Trote / Rodaje Regenerativo Z1</p></div><span class="ax-tss ax-tss--plain">22 TSS</span></div>
+                <div class="ax-row ax-row--work"><div><span class="ax-time">06:30 - 07:30</span><p>Natación Técnica</p></div><span class="ax-tss">45 TSS</span></div>
+              </div>
+            </div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="conexiones" aria-labelledby="conexiones-h">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <h2 id="conexiones-h">ApexHub lee Strava, Garmin y archivos .FIT</h2>
+          <p>Las sesiones entran una vez, sin duplicar tu carga semanal. Si un .fit no trae GPS, trazas la ruta en el mapa o subes una captura.</p>
+        </div>
+      </div>
+      <div class="frame fill" data-visual data-fx="grain-gradient" data-fx-seed="7" data-fx-palette='{"bg":"#cdd6c6","surface":"#dce3d6","ink":"#262d24","accent":"#6c8e63"}'>
+        <div class="dg" data-diagram data-dg-still><script type="application/json">{"layout":"bowtie","size":"band","alt":"Strava, Garmin Connect, archivos .FIT de XOSS, Apple Health y sensores Bluetooth entran a ApexHub, que calcula el índice ACWR, las calorías del día y exporta entrenos a Google Calendar.","sources":[{"label":"Strava","icon":"si:strava","sub":"Actividades y GPS"},{"label":"Garmin Connect","icon":"si:garmin","sub":"Potencia y VO2 Máx"},{"label":"XOSS / iGPSPORT","icon":"ui:file-up","sub":"Archivo .FIT"},{"label":"Apple Health","icon":"apple","sub":"Pulso y sueño"},{"label":"Sensores BLE","icon":"logos:bluetooth","sub":"Banda cardíaca"}],"core":{"label":"ApexHub","icon":"ui:zap"},"targets":[{"label":"Índice ACWR","icon":"ui:gauge","sub":"Ratio 7d / 28d"},{"label":"Calorías","icon":"ui:flame","sub":"Restantes hoy"},{"label":"Google Calendar","icon":"google-calendar","sub":"Entrenos agendados"}]}</script></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="descargar" style="--hm: 2" aria-labelledby="descargar-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="descargar-h">ApexHub en Android, Windows y web</h2>
+        <p>Tus datos se guardan en tu dispositivo. Conectar Google es opcional, solo para respaldo.</p>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-4 dl-card" id="android">
+          <span class="ic-tile" style="--ic: 40px"><img data-icon="android" src="assets/icons/android.svg" alt="" loading="lazy" decoding="async" width="28" height="28"></span>
+          <h3>Android</h3>
+          <p>El archivo APK se instala directo en tu teléfono.</p>
+          <!-- PROPIETARIO: cambia href="#android" por el enlace de descarga del APK -->
+          <div class="btn-row"><a class="btn btn--secondary" href="#android" data-owner-link="apk">Descargar APK</a></div>
+          <div class="panel">
+            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:300px;--ax:max(24px, 50% - 150px);--ay:32px;--ay-sm:16px">
+              <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: elegir idioma, paso 1 de 4">
+                <div class="ax-head"><span class="ax-chip ax-chip--blue mono">APEXHUB</span><span class="ax-lbl">1 / 4</span></div>
+                <p class="ax-title">¿Qué idioma hablas?</p>
+                <div class="ax-row ax-row--work"><div><p>Español (Latinoamérica / España)</p><small>Métrico (km, kg, kcal)</small></div></div>
+                <div class="ax-row"><div><p>English (US / UK)</p><small>Metric / Imperial ready</small></div></div>
+                <div class="ax-row"><div><p>Português (Brasil / Portugal)</p><small>Métrico (km, kg, kcal)</small></div></div>
+              </div>
+            </div></div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-4 dl-card" id="windows">
+          <span class="ic-tile" style="--ic: 40px"><img data-icon="windows" src="assets/icons/windows.svg" alt="" loading="lazy" decoding="async" width="28" height="28"></span>
+          <h3>Windows</h3>
+          <p>Instalador ApexHub-Setup-2.5.0.exe para tu computadora.</p>
+          <!-- PROPIETARIO: cambia href="#windows" por el enlace de descarga de ApexHub-Setup-2.5.0.exe -->
+          <div class="btn-row"><a class="btn btn--secondary" href="#windows" data-owner-link="windows">Descargar para Windows</a></div>
+          <div class="panel">
+            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:300px;--ax:max(24px, 50% - 150px);--ay:32px;--ay-sm:16px">
+              <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: bienvenida, paso 2 de 4">
+                <div class="ax-head"><span class="ax-lbl">← Idioma</span><span class="ax-lbl">2 / 4</span></div>
+                <p class="ax-title">Bienvenido a ApexHub</p>
+                <p style="margin:0;color:var(--ax-muted)">Tu aplicación para organizar entrenamientos, medir tu carga física real y controlar tus calorías diarias sin sobrecargarte.</p>
+                <div class="ax-pair" style="grid-template-columns:repeat(3,1fr)"><div><p style="margin:0;font-weight:500">Agenda</p><span class="ax-lbl">Por horarios</span></div><div><p style="margin:0;font-weight:500">Fatiga</p><span class="ax-lbl">Por tu nivel</span></div><div><p style="margin:0;font-weight:500">Calorías</p><span class="ax-lbl">Foto al plato</span></div></div>
+              </div>
+            </div></div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-4 dl-card" id="web">
+          <span class="ic-tile" style="--ic: 40px"><img data-icon="chrome" src="assets/icons/chrome.svg" alt="" loading="lazy" decoding="async" width="28" height="28"></span>
+          <h3>Versión web de la app</h3>
+          <p>Ábrela en el navegador y agrégala a tu pantalla de inicio.</p>
+          <!-- PROPIETARIO: cambia href="#web" por la dirección donde publiques la PWA -->
+          <div class="btn-row"><a class="btn btn--secondary" href="#web" data-owner-link="web">Abrir versión web</a></div>
+          <div class="panel">
+            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:300px;--ax:max(24px, 50% - 150px);--ay:32px;--ay-sm:16px">
+              <div class="ax ax-card ui ui-ax" role="img" aria-label="Pantalla de ApexHub: elegir deportes, paso 3 de 4">
+                <div class="ax-head"><span class="ax-lbl ax-lbl--blue">Paso 3 de 4 • Disciplinas</span><span class="ax-lbl mono">75%</span></div>
+                <p class="ax-title">¿Qué haces?</p>
+                <div class="ax-chips"><span class="is-on">Ciclismo</span><span class="is-on">Running</span><span>Natación</span><span>Triatlón</span><span>Gimnasio</span></div>
+              </div>
+            </div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-band" id="preguntas" style="--g-screen: calc(var(--hm, var(--h, 1)) * 100lvh)" aria-labelledby="preguntas-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-5"><h2 id="preguntas-h">Preguntas sobre ApexHub</h2></div>
+        <div class="faq span-6 start-7">
+          <div class="faq__item"><h3>¿ApexHub pide crear una cuenta?</h3><p>No. ApexHub funciona en modo local; conectar tu cuenta de Google es opcional y sirve como respaldo.</p></div>
+          <div class="faq__item"><h3>¿Qué datos pide la app al empezar?</h3><p>Tu idioma, tus deportes, peso, altura, edad, tu nivel (de Principiante a Pro) y tu meta: mantenimiento, déficit de 350 kcal o superávit de 300 kcal al día.</p></div>
+          <div class="faq__item"><h3>¿Qué archivos .FIT lee ApexHub?</h3><p>Los que exportan los ciclocomputadores XOSS, iGPSPORT, Bryton y Garmin, con o sin GPS.</p></div>
+          <div class="faq__item"><h3>¿En qué idiomas está la app?</h3><p>Español, inglés y portugués, con unidades métricas: km, kg y kcal.</p></div>
+          <div class="faq__item"><h3>¿La app funciona sin internet?</h3><p>La versión web carga más rápido desde la segunda vez, pero los mapas y las rutas GPS siempre necesitan conexión.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Descarga ApexHub hoy</h2><p class="t-lead">Versión 2.5.0 para Android, Windows y web. Sin cuenta obligatoria.</p></div>
+        <a class="btn btn--primary" href="#descargar">Descargar ApexHub<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <p class="close__word" aria-hidden="true">ApexHub</p>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-6 stack-4">
+          <a class="nav__logo" href="#top"><img src="icons/icon-192.png" alt="" width="28" height="28" loading="lazy" decoding="async">ApexHub</a>
+          <p class="footer__lede">App de carga, calorías y agenda para atletas multideporte.</p>
+        </div>
+        <div class="span-3 start-7 footer__col"><h3>Producto</h3><ul><li><a href="#funciones">Funciones</a></li><li><a href="#deportes">Deportes</a></li><li><a href="#conexiones">Conexiones</a></li></ul></div>
+        <div class="span-3 footer__col"><h3>Ayuda</h3><ul><li><a href="#preguntas">Preguntas</a></li><li><a href="#sesiones">Archivos .FIT</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 ApexHub</span>
+        <span>Los nombres y logotipos de productos son marcas de sus dueños.</span>
+        <a class="credits" href="credits.html">Fotografía vía Wikimedia Commons</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+<script type="module" src="assets/diagrams/mount.js"></script>
+</body>
+</html>
